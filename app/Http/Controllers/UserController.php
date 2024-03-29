@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
    private $users;
+   const _PER_PAGE = 3;
    public function __construct()
    {
       $this->users = new Users();
@@ -56,7 +58,7 @@ class UserController extends Controller
          'sortType' =>$sortType
       ];
      
-      $userList = $this->users->getAllUser($filter,$sortBy);
+      $userList = $this->users->getAllUser($filter,$sortBy,self::_PER_PAGE);
       return view('client.users.lists', compact('title', 'userList','sortType'));
    }
    public function add()
